@@ -4,7 +4,7 @@ using taskFelipe.Data.ValueObject;
 namespace taskFelipe.Controllers
 {
     [ApiController]
-    [Route("api/v1/Task/")]
+    [Route("api/v1/task/")]
     public class ClienteController : Controller
     {
         readonly ITaskRepository _taskRepository;
@@ -22,7 +22,7 @@ namespace taskFelipe.Controllers
             return Ok(task);
         }
 
-        [HttpGet("GetTaskFilter")]
+        [HttpGet("get-task-filter")]
         public async Task<ActionResult<TaskVO>> GetTaskFilter(FilterVO vo)
         {
             var task = await _taskRepository.GetFilter(vo.Id, vo.Title, vo.page);
@@ -46,7 +46,7 @@ namespace taskFelipe.Controllers
             return Ok(task);
         }
 
-        [HttpDelete("delete{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             var status = await _taskRepository.Delete(id);
