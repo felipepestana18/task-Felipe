@@ -8,7 +8,7 @@ namespace taskFelipe.Config
         public static MapperConfiguration RegisterMaps()
         {
             var mappingConfig = new MapperConfiguration(config => {
-                config.CreateMap<TaskVO, Task>().ReverseMap();
+                config.CreateMap<TaskVO, Model.Task>().ReverseMap();
 
             });
             return mappingConfig;

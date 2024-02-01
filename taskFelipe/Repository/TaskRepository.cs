@@ -1,38 +1,100 @@
-﻿using taskFelipe.Data.ValueObject;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using taskFelipe.Data.ValueObject;
+using taskFelipe.Model.Context;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
-namespace taskFelipe.Repository 
+namespace taskFelipe.Repository
 {
 
     public class TaskRepository : ITaskRepository
     {
-        Task<TaskVO> ITaskRepository.Create(TaskVO vo)
+
+        private readonly MySQLContext _context;
+        private IMapper _mapper;
+
+
+        public TaskRepository(MySQLContext context, IMapper mapper)
         {
-            throw new NotImplementedException();
+
+            _context = context;
+            _mapper = mapper;
+
+        }
+        public async Task<IEnumerable<TaskVO>> GetAll()
+        {
+            var tasks = await _context.Tasks.ToListAsync();
+            return _mapper.Map<List<TaskVO>>(tasks);
         }
 
-        Task<bool> ITaskRepository.Delete(int id)
+        public async Task<IEnumerable<TaskVO>> GetFilter(int id, string Title, int page)
         {
-            throw new NotImplementedException();
+
+            if (id > 0)
+            {
+                var task = await _context.Tasks.Where(x => x.Id == id).ToListAsync();
+                return _mapper.Map<List<TaskVO>>(task);
+            }
+
+            else if (!string.IsNullOrEmpty(Title))
+            {
+                Title = "Atividade";
+                var task = await _context.Tasks.Where(x => x.Title.Contains(Title)).ToListAsync();
+                return _mapper.Map<List<TaskVO>>(task);
+
+            }
+            else if (page > 0)
+            {
+                var task = await _context.Tasks.Skip(0).Take(10).ToListAsync();
+                return _mapper.Map<List<TaskVO>>(task);
+            }
+
+            return null;
         }
 
-        Task<bool> ITaskRepository.Done(int id)
+
+        public async Task<TaskVO> Update(TaskVO vo)
         {
-            throw new NotImplementedException();
+            var task = _mapper.Map<Model.Task>(vo);
+            task.updated_at = true;
+            _context.Update(task);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<TaskVO>(task);
         }
 
-        Task<IEnumerable<TaskVO>> ITaskRepository.GetAll()
+        public async Task<TaskVO> Create(TaskVO vo)
         {
-            throw new NotImplementedException();
+            var task = _mapper.Map<Model.Task>(vo);
+            task.completed_at = true;
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<TaskVO>(task);
         }
 
-        Task<TaskVO> ITaskRepository.GetById(int id)
+
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
+            if (task == null) return false;
+            _context.Remove(task);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        Task<TaskVO> ITaskRepository.Update(TaskVO vo)
+        public async Task<bool> Done(int id)
         {
-            throw new NotImplementedException();
+
+            Model.Task task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
+            if (task == null) return false;
+            task.completed_at = true;
+            _context.Update(task);
+            await _context.SaveChangesAsync();
+            return true;
         }
+
+
+
+
+
     }
 }

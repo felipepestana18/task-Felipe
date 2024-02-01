@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using taskFelipe.Config;
 using taskFelipe.Model.Context;
 using taskFelipe.Repository;
@@ -23,7 +24,28 @@ builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 builder.Services.AddControllers();
 
+
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.EnableAnnotations();
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Task.FelipePestana" });
+
+});
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 // Configure the HTTP request pipeline.
 

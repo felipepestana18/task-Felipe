@@ -3,7 +3,7 @@
 
 public interface ITaskRepository
 {
-    Task<TaskVO> GetById(int id);
+    Task<IEnumerable<TaskVO>> GetFilter(int id, string Title,  int page);
 
     Task<IEnumerable<TaskVO>> GetAll();
 

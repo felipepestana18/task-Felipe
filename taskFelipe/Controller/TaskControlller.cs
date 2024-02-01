@@ -17,33 +17,33 @@ namespace taskFelipe.Controllers
         [HttpGet("find-all")]
         public async Task<ActionResult<TaskVO>> GetAll()
         {
-            var clientes = await _taskRepository.GetAll();
-            if (clientes == null) return NotFound();
-            return Ok(clientes);
+            var task = await _taskRepository.GetAll();
+            if (task == null) return NotFound();
+            return Ok(task);
         }
 
-        [HttpGet("find-by-id/{id}")]
-        public async Task<ActionResult<TaskVO>> GetById(int id)
+        [HttpGet("GetTaskFilter")]
+        public async Task<ActionResult<TaskVO>> GetTaskFilter(FilterVO vo)
         {
-            var cliente = await _taskRepository.GetById(id);
-            if (cliente == null) return NotFound();
-            return Ok(cliente);
+            var task = await _taskRepository.GetFilter(vo.Id, vo.Title, vo.page);
+            if (task == null) return NotFound();
+            return Ok(task);
         }
 
         [HttpPost("create")]
         public async Task<ActionResult<TaskVO>> Create(TaskVO vo)
         {
-            var cliente = await _taskRepository.Create(vo);
-            if (cliente == null) return NotFound();
-            return Ok(cliente);
+            var task = await _taskRepository.Create(vo);
+            if (task == null) return NotFound();
+            return Ok(task);
         }
 
         [HttpPut("update")]
         public async Task<ActionResult<TaskVO>> Update(TaskVO vo)
         {
-            var cliente = await _taskRepository.Update(vo);
-            if (cliente == null) return NotFound();
-            return Ok(cliente);
+            var task = await _taskRepository.Update(vo);
+            if (task == null) return NotFound();
+            return Ok(task);
         }
 
         [HttpDelete("delete{id}")]
@@ -55,10 +55,10 @@ namespace taskFelipe.Controllers
         }
 
 
-        [HttpDelete("delete{id}")]
-        public async Task<ActionResult<bool>> Delete(int id)
+        [HttpPut("done/{id}")]
+        public async Task<ActionResult<bool>> Done(int id)
         {
-            var status = await _taskRepository.Delete(id);
+            var status = await _taskRepository.Done(id);
             if (!status) BadRequest();
             return Ok(status);
         }
