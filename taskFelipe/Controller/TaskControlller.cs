@@ -4,7 +4,7 @@ using taskFelipe.Data.ValueObject;
 namespace taskFelipe.Controllers
 {
     [ApiController]
-    [Route("api/v1/")]
+    [Route("api/v1/task")]
     public class ClienteController : Controller
     {
         readonly ITaskRepository _taskRepository;
