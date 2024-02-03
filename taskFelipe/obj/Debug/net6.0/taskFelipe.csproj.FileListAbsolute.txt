@@ -41,3 +41,4 @@ C:\Users\Pichau\Documents\taskFelipe\taskFelipe\obj\Debug\net6.0\refint\taskFeli
 C:\Users\Pichau\Documents\taskFelipe\taskFelipe\obj\Debug\net6.0\taskFelipe.pdb
 C:\Users\Pichau\Documents\taskFelipe\taskFelipe\obj\Debug\net6.0\taskFelipe.genruntimeconfig.cache
 C:\Users\Pichau\Documents\taskFelipe\taskFelipe\obj\Debug\net6.0\ref\taskFelipe.dll
+C:\Users\Pichau\Documents\taskFelipe\taskFelipe\bin\Debug\net6.0\libman.json

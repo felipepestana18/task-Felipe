@@ -22,7 +22,7 @@ namespace taskFelipe.Controllers
             return Ok(task);
         }
 
-        [HttpGet("get-task-filter")]
+        [HttpPost("task-filter")]
         public async Task<ActionResult<TaskVO>> GetTaskFilter(FilterVO vo)
         {
             var task = await _taskRepository.GetFilter(vo.Id, vo.Title, vo.page);

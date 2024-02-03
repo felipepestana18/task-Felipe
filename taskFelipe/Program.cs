@@ -25,6 +25,7 @@ builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddControllers();
 
 
+
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSwaggerGen(c =>
@@ -39,6 +40,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors(
+  options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader()
+      );
 
 if (app.Environment.IsDevelopment())
 {

@@ -38,7 +38,6 @@ namespace taskFelipe.Repository
 
             else if (!string.IsNullOrEmpty(Title))
             {
-                Title = "Atividade";
                 var task = await _context.Tasks.Where(x => x.Title.Contains(Title)).ToListAsync();
                 return _mapper.Map<List<TaskVO>>(task);
 
@@ -65,7 +64,7 @@ namespace taskFelipe.Repository
         public async Task<TaskVO> Create(TaskVO vo)
         {
             var task = _mapper.Map<Model.Task>(vo);
-            task.completed_at = true;
+            task.created_at = true;
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
             return _mapper.Map<TaskVO>(task);
