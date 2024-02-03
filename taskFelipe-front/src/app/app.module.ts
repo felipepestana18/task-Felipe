@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormTaskComponent } from './pages/form-task/form-task.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,12 @@ import { FormTaskComponent } from './pages/form-task/form-task.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
