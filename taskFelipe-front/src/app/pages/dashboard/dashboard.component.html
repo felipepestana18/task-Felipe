@@ -4,13 +4,14 @@
 <br/>
 <div class="row">
   <div class="col">
-
-      <input type="text" class="form-control" placeholder="Enter the  Title">
+      <input type="text" [(ngModel)]="filterTask" class="form-control" placeholder="Enter the  Title">
   </div>
    <div class="col">
-     <button type="button" class="btn btn-primary">esearch</button>
+     <button type="button" (click)="reserarchTask()"  class="btn btn-primary">Reserarch</button>
    </div>
 </div>
+  {{filterTask}}
+ 
 <hr>
 <table class="table">
   <thead class="thead-dark">
@@ -27,22 +28,22 @@
       <th scope="col">Done</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngFor="let task of tasks">
     <tr>
-      <th scope="row">1</th>
-      <td>Uma atividade bem Legal</td>
-      <td>Foi feito em Duas Semanas</td>
-      <td>True</td>
-      <td>True</td>
-      <td>False</td>
+      <th scope="row">{{task.id}}</th>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>{{task.completed_at}}</td>
+      <td>{{task.created_at}}</td>
+      <td>{{task.updated_at}}</td>
       <td>
-        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
       </td>
       <td>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" (click)="updateTask(task.id)" class="btn btn-primary">Update</button>
       </td>
         <td>
-        <button type="button" class="btn btn-success">Done</button>
+        <button type="button" (click)="taskDone(task.id)" class="btn btn-success">Done</button>
       </td>
     </tr>
   </tbody>
