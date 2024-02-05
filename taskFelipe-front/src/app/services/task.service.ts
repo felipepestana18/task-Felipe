@@ -22,7 +22,7 @@ export class TaskService {
   }
 
   getDataFilter(filter: any) {
-    console.log(filter);
+
     return this.http.post(this.url + 'task-filter', filter)
   }
 
