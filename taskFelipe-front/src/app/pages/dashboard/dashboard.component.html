@@ -13,40 +13,45 @@
   {{filterTask}}
  
 <hr>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
+<div *ngIf="tasks">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
 
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Completed</th>
-      <th scope="col">Created</th>
-      <th scope="col">Upated Task</th>
-      <th scope="col">Delete</th>
-      <th scope="col">Upated</th>
-      <th scope="col">Done</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let task of tasks">
-    <tr>
-      <th scope="row">{{task.id}}</th>
-      <td>{{task.title}}</td>
-      <td>{{task.description}}</td>
-      <td>{{task.completed_at}}</td>
-      <td>{{task.created_at}}</td>
-      <td>{{task.updated_at}}</td>
-      <td>
-        <button type="button" (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
-      </td>
-      <td>
-        <button type="button" (click)="updateTask(task.id)" class="btn btn-primary">Update</button>
-      </td>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Created</th>
+        <th scope="col">Upated Task</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Upated</th>
+        <th scope="col">Done</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let task of tasks">
+      <tr>
+        <th scope="row">{{task.id}}</th>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.completed_at}}</td>
+        <td>{{task.created_at}}</td>
+        <td>{{task.updated_at}}</td>
         <td>
-        <button type="button" (click)="taskDone(task.id)" class="btn btn-success">Done</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          <button type="button" (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
+        </td>
+        <td>
+          <button type="button" (click)="updateTask(task.id)" class="btn btn-primary">Update</button>
+        </td>
+          <td>
+          <button type="button" (click)="taskDone(task.id)" class="btn btn-success">Done</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
 </div>
+<div *ngIf="!tasks">
+  <h1 class="position"> Create new Task!</h1>
 </div>
