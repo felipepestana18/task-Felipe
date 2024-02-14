@@ -5,11 +5,11 @@ namespace taskFelipe.Controllers
 {
     [ApiController]
     [Route("api/v1/task")]
-    public class ClienteController : Controller
+    public class TaskController : Controller
     {
         readonly ITaskRepository _taskRepository;
 
-        public ClienteController(ITaskRepository taskRepository)
+        public TaskController(ITaskRepository taskRepository)
         {
             _taskRepository = taskRepository;
         }
